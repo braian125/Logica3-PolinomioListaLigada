@@ -1,5 +1,8 @@
 package Polinomio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -11,9 +14,9 @@ import Polinomio.util.Termino;
 public class Polinomio {
     public static void main(String[] args) throws Exception {
         char opc;
-
         JTextField coeficiente = new JTextField(5);
         JTextField exponente = new JTextField(5);
+        List<ListaLigadaSimpleConCabeza> poli = new ArrayList<>();
 
         do{
             opc = Menu();
@@ -44,11 +47,11 @@ public class Polinomio {
                         
                         addTermino = JOptionPane.showConfirmDialog(
                             null, "Desea continuar agregando términos?",
-                            "An Inane Question",
+                            "Question",
                         JOptionPane.YES_NO_OPTION);
                     } while(addTermino == JOptionPane.YES_OPTION);
-
-                    System.out.println(listaPolinomio);
+                    poli.add(listaPolinomio);
+                    //System.out.println(poli);
                     break;
             }
         } while(opc != '6');
