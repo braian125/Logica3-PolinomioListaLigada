@@ -27,18 +27,28 @@ public class Polinomio {
                     nuevoTermino.add(new JLabel("Exponente:"));
                     nuevoTermino.add(exponente);
 
-                    int result = JOptionPane.showConfirmDialog(null, nuevoTermino, 
-                            "Crear termino", JOptionPane.OK_CANCEL_OPTION);
-                    if (result == JOptionPane.OK_OPTION) {
-                        PolinomioListaSimpleConCabeza polinomio = new PolinomioListaSimpleConCabeza();
-                        Termino termino = new Termino(Integer.parseInt(coeficiente.getText()), Integer.parseInt(exponente.getText()));
-                        Nodo n = new Nodo(termino);
-                        Nodo cA = polinomio.getCabeza();
-                        cA.setLiga(n);
-                        cA = n;
-                        System.out.println(polinomio);
-                    }
+                    ListaLigadaSimpleConCabeza listaPolinomio = new ListaLigadaSimpleConCabeza();
+                    Nodo cA = listaPolinomio.getCabeza();
 
+                    int addTermino;
+                    do {
+                        coeficiente.setText("");
+                        exponente.setText("");
+                        int result = JOptionPane.showConfirmDialog(null, nuevoTermino, 
+                                "Crear termino", JOptionPane.OK_CANCEL_OPTION);
+                        if (result == JOptionPane.OK_OPTION) {
+                            Nodo n = new Nodo(new Termino(Integer.parseInt(coeficiente.getText()), Integer.parseInt(exponente.getText())));
+                            cA.setLiga(n);
+                            cA = n;
+                        }
+                        
+                        addTermino = JOptionPane.showConfirmDialog(
+                            null, "Desea continuar agregando términos?",
+                            "An Inane Question",
+                        JOptionPane.YES_NO_OPTION);
+                    } while(addTermino == JOptionPane.YES_OPTION);
+
+                    System.out.println(listaPolinomio);
                     break;
             }
         } while(opc != '6');
