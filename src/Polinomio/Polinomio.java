@@ -16,7 +16,7 @@ public class Polinomio {
         char opc;
         JTextField coeficiente = new JTextField(5);
         JTextField exponente = new JTextField(5);
-        List<ListaLigadaSimpleConCabeza> poli = new ArrayList<>();
+        List<ListaLigadaSimpleConCabeza> misPolinomios = new ArrayList<>();
 
         do{
             opc = Menu();
@@ -50,8 +50,39 @@ public class Polinomio {
                             "Question",
                         JOptionPane.YES_NO_OPTION);
                     } while(addTermino == JOptionPane.YES_OPTION);
-                    poli.add(listaPolinomio);
-                    //System.out.println(poli);
+                    misPolinomios.add(listaPolinomio);
+                    break;
+                
+                case '2':
+                    int displayAllElements = JOptionPane.showConfirmDialog(
+                        null, "Desea mostrar todos los polinomios?",
+                        "Question",
+                    JOptionPane.YES_NO_OPTION);
+
+                    if (displayAllElements == JOptionPane.YES_NO_OPTION) {
+                        String strMisPolinomios = "";
+                        for(int i=0; i < misPolinomios.size(); i++ ) {
+                            strMisPolinomios += misPolinomios.get(i)+"\n";
+                        }
+
+                        JOptionPane.showMessageDialog(null, strMisPolinomios);
+                        
+                    } else {
+                        String indexPolinomio;
+                        do{
+                            indexPolinomio = JOptionPane.showInputDialog("Buscar por posicion del polinomio");
+                            
+                            if(!(indexPolinomio == null || (indexPolinomio != null && ("".equals(indexPolinomio)))))   
+                            {
+                                try {
+                                    JOptionPane.showMessageDialog(null, misPolinomios.get(Integer.parseInt(indexPolinomio)));
+                                } catch ( IndexOutOfBoundsException e ) {
+                                    JOptionPane.showMessageDialog(null, "Posición del polinomio no existe");
+                                }
+                            }
+                        } while( !(indexPolinomio == null || (indexPolinomio != null && ("".equals(indexPolinomio)))) );
+                    }
+
                     break;
             }
         } while(opc != '6');
